@@ -7,9 +7,9 @@ import { pEvent } from 'p-event'
 import kill from 'tree-kill-promise'
 
 export default class Nuxt {
-  constructor(config) {
-    this.dev = config?.dev
-    this.config = config || {} |> omit(['dev'])
+  constructor(config = {}) {
+    this.dev = config.dev
+    this.config = config |> omit(['dev'])
   }
 
   async build() {

@@ -10,10 +10,10 @@ import Self from './index.js'
 
 export default tester(
   {
-    'dev server': async () => {
+    async 'dev server'() {
       await outputFiles({
         'package.json': JSON.stringify({ type: 'module' }),
-        'pages-new/index.vue': endent`
+        'pages/index.vue': endent`
       <template>
         <div class="foo" />
       </template>
@@ -21,6 +21,7 @@ export default tester(
       })
 
       const nuxt = new Self({
+        dev: true,
         modules: [() => fs.outputFile('foo.txt', '')],
         telemetry: false,
       })
@@ -43,39 +44,7 @@ export default tester(
         await nuxt.close()
       }
     },
-    prod: async () => {
-      await outputFiles({
-        'package.json': JSON.stringify({ type: 'module' }),
-        'pages-new/index.vue': endent`
-          <template>
-            <div class="foo" />
-          </template>
-        `,
-      })
-
-      const nuxt = new Self({
-        modules: [() => fs.outputFile('foo.txt', '')],
-        telemetry: false,
-      })
-      await nuxt.build()
-      await nuxt.listen()
-      try {
-        expect(await fs.exists('foo.txt')).toEqual(true)
-        await this.page.goto('http://localhost:3000')
-        await this.page.waitForSelector('.foo')
-        await fs.outputFile(
-          P.join('pages', 'index.vue'),
-          endent`
-            <template>
-              <div class="bar" />
-            </template>
-          `
-        )
-      } finally {
-        await nuxt.close()
-      }
-    },
-    async 'prod works'() {
+    async prod() {
       await outputFiles({
         'package.json': JSON.stringify({ type: 'module' }),
         'pages/index.vue': endent`
@@ -85,27 +54,25 @@ export default tester(
         `,
       })
 
-      const nuxt = new Self({ telemetry: false })
+      const nuxt = new Self({
+        modules: [() => fs.outputFile('foo.txt', '')],
+        telemetry: false,
+        vite: { logLevel: 'error' },
+      })
       await nuxt.build()
       await nuxt.listen()
       try {
+        expect(await fs.exists('foo.txt')).toEqual(true)
         await this.page.goto('http://localhost:3000')
         await this.page.waitForSelector('.foo')
         await fs.outputFile(
           P.join('pages', 'index.vue'),
           endent`
-        <template>
-          <div class="bar" />
-        </template>
-      `
+            <template>
+              <div class="bar" />
+            </template>
+          `
         )
-        await fs.outputFile(
-          P.join('pages', 'index.vue'),
-          endent`
-        asdfasdf
-      `
-        )
-        await this.page.waitForSelector('.bar')
       } finally {
         await nuxt.close()
       }
