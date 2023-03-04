@@ -1,8 +1,7 @@
 import { omit } from '@dword-design/functions'
 import nuxtDevServer from '@dword-design/nuxt-dev-server'
-import { loadNuxt } from '@nuxt/kit'
+import packageName from 'depcheck-package-name'
 import { execaCommand } from 'execa'
-import { build } from 'nuxt'
 import { pEvent } from 'p-event'
 import kill from 'tree-kill-promise'
 
@@ -14,8 +13,18 @@ export default class Nuxt {
 
   async build() {
     if (!this.dev) {
-      this.nuxt = await loadNuxt({ config: this.config })
-      await build(this.nuxt)
+      /**
+       * For some reason Nuxt decides from the environment if it is in dev mode. Also, the passed config value
+       * of dev doesn't seem to be taken into account. This is why we have to import Nuxt late so that the
+       * environment variable is already correct
+       *
+       * Definition of dev variable: https://github.com/nuxt/nuxt/blob/main/packages/schema/src/config/common.ts#L147
+       * applyDefaults: https://github.com/nuxt/nuxt/blob/main/packages/kit/src/loader/config.ts#L53
+       */
+
+      const nuxtKit = await import(packageName`@nuxt/kit`)
+      this.nuxt = await nuxtKit.loadNuxt({ config: this.config })
+      await nuxtKit.buildNuxt(this.nuxt)
     }
   }
 

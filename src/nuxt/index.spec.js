@@ -14,10 +14,10 @@ export default tester(
       await outputFiles({
         'package.json': JSON.stringify({ type: 'module' }),
         'pages/index.vue': endent`
-      <template>
-        <div class="foo" />
-      </template>
-    `,
+          <template>
+            <div class="foo" />
+          </template>
+        `,
       })
 
       const nuxt = new Self({
