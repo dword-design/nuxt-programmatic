@@ -1,5 +1,5 @@
 <!-- TITLE/ -->
-# nuxt-programmatic
+# @dword-design/nuxt-programmatic
 <!-- /TITLE -->
 
 <!-- BADGES/ -->
@@ -53,10 +53,10 @@
 
 ```bash
 # npm
-$ npm install nuxt-programmatic
+$ npm install @dword-design/nuxt-programmatic
 
 # Yarn
-$ yarn add nuxt-programmatic
+$ yarn add @dword-design/nuxt-programmatic
 ```
 <!-- /INSTALL -->
 

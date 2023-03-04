@@ -1,11 +1,13 @@
 {
-  "name": "nuxt-programmatic",
+  "name": "@dword-design/nuxt-programmatic",
   "version": "1.0.0",
   "private": true,
   "repository": "dword-design/nuxt-programmatic",
   "funding": "https://github.com/sponsors/dword-design",
   "license": "MIT",
   "author": "Sebastian Landwehr <info@sebastianlandwehr.com>",
+  "type": "module",
+  "exports": "./dist/index.js",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -20,8 +22,23 @@
     "prepublishOnly": "base prepublishOnly",
     "test": "base test"
   },
+  "dependencies": {
+    "@dword-design/functions": "^4.1.0",
+    "@dword-design/nuxt-dev-server": "^1.0.0",
+    "@nuxt/kit": "^3.2.3",
+    "execa": "^7.0.0",
+    "nuxt": "^3.2.3",
+    "p-event": "^5.0.1",
+    "tree-kill-promise": "^3.0.1"
+  },
   "devDependencies": {
-    "@dword-design/base": "^9.4.3"
+    "@dword-design/base": "^9.4.3",
+    "@dword-design/puppeteer": "^6.0.2",
+    "@dword-design/tester": "^2.0.12",
+    "@dword-design/tester-plugin-puppeteer": "^2.1.23",
+    "@dword-design/tester-plugin-tmp-dir": "^2.1.9",
+    "fs-extra": "^11.1.0",
+    "output-files": "^2.0.11"
   },
   "engines": {
     "node": ">=14"
