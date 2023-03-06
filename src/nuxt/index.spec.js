@@ -12,6 +12,14 @@ export default tester(
   {
     async 'dev server'() {
       await outputFiles({
+        'nuxt.config.js': endent`
+          import fs from 'fs-extra'
+
+          export default {
+            modules: [() => fs.outputFile('foo.txt', '')],
+            telemetry: false,
+          }
+        `,
         'package.json': JSON.stringify({ type: 'module' }),
         'pages/index.vue': endent`
           <template>
@@ -20,11 +28,7 @@ export default tester(
         `,
       })
 
-      const nuxt = new Self({
-        dev: true,
-        modules: [() => fs.outputFile('foo.txt', '')],
-        telemetry: false,
-      })
+      const nuxt = new Self({ dev: true })
       await nuxt.build()
       await nuxt.listen()
       try {
@@ -46,6 +50,15 @@ export default tester(
     },
     async prod() {
       await outputFiles({
+        'nuxt.config.js': endent`
+          import fs from 'fs-extra'
+
+          export default {
+            modules: [() => fs.outputFile('foo.txt', '')],
+            telemetry: false,
+            vite: { logLevel: 'error' },
+          }
+        `,
         'package.json': JSON.stringify({ type: 'module' }),
         'pages/index.vue': endent`
           <template>
@@ -54,11 +67,7 @@ export default tester(
         `,
       })
 
-      const nuxt = new Self({
-        modules: [() => fs.outputFile('foo.txt', '')],
-        telemetry: false,
-        vite: { logLevel: 'error' },
-      })
+      const nuxt = new Self()
       await nuxt.build()
       await nuxt.listen()
       try {
