@@ -1669,9 +1669,9 @@
     tinycolor2 "^1.4.1"
 
 "@dword-design/nuxt-dev-server@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@dword-design/nuxt-dev-server/-/nuxt-dev-server-1.0.0.tgz#f82f9398da2d83c45b0d0249ae3c737a720a9269"
-  integrity sha512-NZPIglieJfAbNzz+cZdEZCKgXB7oCJqO3wZJoB6jXsWn8VlrnDeNmepMb6iEfyxzmuNF8cu33vWhF8pmnKtEZA==
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@dword-design/nuxt-dev-server/-/nuxt-dev-server-1.0.17.tgz#e5b291d30bb82ede651a0a17450a33c66908f23a"
+  integrity sha512-10My6Qd7MvphE6A/VAEyfffOFo+OaggGTYQq8NPr5Ws44ZnF61tY8gjzyPQfeO+/4W7TzI/b0CdSxhmZobIdyQ==
   dependencies:
     nuxi "npm:@dword-design/nuxi@^0.2.3"
 
